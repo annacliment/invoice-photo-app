@@ -1,13 +1,21 @@
 # Invoice Photo Extractor
 
-A simple browser-based prototype that lets you upload an invoice image, run OCR, and extract basic invoice data such as:
+A browser-based prototype that lets you upload one or more invoice photos at once, run OCR (Spanish + English), and fill in an editable form per invoice.
 
-- Vendor name
-- Invoice number
-- Date
-- Subtotal
-- Tax
-- Total amount
+Supported document types: invoices, simplified invoices / receipts (tickets), credit notes (rectificativas), pro forma invoices, quotes and receipts.
+
+Extracted fields:
+
+- Document type, invoice number, issue date, due date
+- Vendor name, tax ID (NIF/CIF/NIE or EU VAT), phone, email
+- Customer name and tax ID
+- Currency, tax base, VAT rate(s) and amount (including multi-rate ticket breakdowns), IRPF withholding, total
+- Payment method and IBAN
+- Line items (quantity, description, amount)
+
+Every field can be corrected by hand; empty fields are highlighted, and a warning is shown when base + VAT − IRPF does not match the total. Results can be exported to CSV (Excel-friendly, `;` separator and decimal comma) or JSON.
+
+The parsing logic lives in `parser.js`, which also runs in Node for testing.
 
 ## How to run
 
@@ -36,12 +44,11 @@ For a production company workflow, the next step would be adding:
 - safer invoice parsing rules
 - backend OCR with validation
 - database storage
-- export to Excel/CSV
 - user authentication and approval flow
 
 ## Future version ideas
 
-- Upload multiple invoices at once
+- PDF and HEIC (iPhone) support
 - Auto-detect invoice type and company
 - Parse line items and taxes
 - Save extracted results in JSON or CSV
