@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Invoice Photo Extractor</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Prototype</p>
+          <h1>Invoice Photo Extractor</h1>
+        </div>
+      </header>
+
+      <main class="layout">
+        <section class="panel upload-panel">
+          <div class="panel-header">
+            <h2>Upload invoice</h2>
+          </div>
+
+          <label class="upload-box" for="invoiceInput">
+            <input id="invoiceInput" type="file" accept="image/*" />
+            <div class="upload-icon">⬆</div>
+            <p>Click to upload an invoice image</p>
+            <small>PNG, JPG, or WEBP</small>
+          </label>
+
+          <div class="preview-wrap">
+            <img id="previewImage" alt="Invoice preview" hidden />
+            <div id="emptyState" class="empty-state">
+              No image selected yet.
+            </div>
+          </div>
+
+          <div class="actions">
+            <button id="ocrButton" class="primary-btn" disabled>
+              Read invoice
+            </button>
+          </div>
+
+          <p id="status" class="status">Waiting for invoice image…</p>
+        </section>
+
+        <section class="panel results-panel">
+          <div class="panel-header">
+            <h2>Extracted information</h2>
+          </div>
+
+          <div class="field-grid">
+            <div class="field-card">
+              <span class="label">Vendor</span>
+              <strong id="vendorValue">—</strong>
+            </div>
+            <div class="field-card">
+              <span class="label">Invoice #</span>
+              <strong id="invoiceNumberValue">—</strong>
+            </div>
+            <div class="field-card">
+              <span class="label">Date</span>
+              <strong id="dateValue">—</strong>
+            </div>
+            <div class="field-card">
+              <span class="label">Subtotal</span>
+              <strong id="subtotalValue">—</strong>
+            </div>
+            <div class="field-card">
+              <span class="label">Tax</span>
+              <strong id="taxValue">—</strong>
+            </div>
+            <div class="field-card highlight">
+              <span class="label">Total</span>
+              <strong id="totalValue">—</strong>
+            </div>
+          </div>
+
+          <div class="raw-panel">
+            <h3>Detected text</h3>
+            <textarea id="ocrOutput" readonly placeholder="OCR output will appear here..."></textarea>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
